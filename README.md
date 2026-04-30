@@ -1,10 +1,11 @@
-# Homebrew tap
+# Homebrew tap for kubectxbar
 
 ```sh
-brew install ericbrophy/tap/kubectxbar
+brew install ericbrophy/kubectxbar/kubectxbar
 brew services start kubectxbar
 ```
 
-| Formula | Source |
-| --- | --- |
-| [kubectxbar](https://github.com/ericbrophy/kubectxbar) | macOS menu bar app for switching kubectl contexts |
+This tap hosts publicly-installable macOS binaries for
+[kubectxbar](https://github.com/ericbrophy/kubectxbar). The kubectxbar
+source repository is private; release artifacts are mirrored here for
+Homebrew users.
