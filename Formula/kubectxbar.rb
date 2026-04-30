@@ -1,9 +1,9 @@
 class Kubectxbar < Formula
   desc "macOS menu bar app for switching kubectl contexts"
   homepage "https://github.com/ericbrophy/kubectxbar"
-  version "0.1.0"
-  url "https://github.com/ericbrophy/homebrew-kubectxbar/releases/download/v#{version}/kubectxbar-#{version}.tar.gz"
-  sha256 "916023aea48f67391c5eb4d83d5f964c304a3e906dd72785482fb617b7056aa6"
+  version "0.1.1"
+  url "https://github.com/ericbrophy/homebrew-kubectxbar/releases/download/v#{version}/kubectxbar-#{version}-universal.tar.gz"
+  sha256 "c79f07829a1358a8c0e7b796fdf6920c74402d439b44eb465f5efed5f5841914"
   license "MIT"
 
   depends_on :macos
@@ -11,18 +11,30 @@ class Kubectxbar < Formula
   depends_on "kubernetes-cli"
 
   def install
-    bin.install "KubectxBar" => "kubectxbar"
+    libexec.install "KubectxBar.app"
+    (bin/"kubectxbar").write <<~SH
+      #!/bin/bash
+      exec "#{libexec}/KubectxBar.app/Contents/MacOS/KubectxBar" "$@"
+    SH
+    (bin/"kubectxbar").chmod 0755
   end
 
   service do
-    run [opt_bin/"kubectxbar"]
+    # Run the bundle's binary directly so macOS associates the running
+    # process with the .app — surfaces the app icon and display name in
+    # Activity Monitor, Force Quit, and Spotlight.
+    run [opt_libexec/"KubectxBar.app/Contents/MacOS/KubectxBar"]
     keep_alive true
     log_path var/"log/kubectxbar.log"
     error_log_path var/"log/kubectxbar.log"
   end
 
   test do
-    assert_predicate bin/"kubectxbar", :exist?
+    assert_predicate libexec/"KubectxBar.app/Contents/MacOS/KubectxBar", :exist?
+    assert_predicate libexec/"KubectxBar.app/Contents/MacOS/KubectxBar", :executable?
     assert_predicate bin/"kubectxbar", :executable?
+    assert_match "KubectxBar",
+                 shell_output("/usr/bin/plutil -extract CFBundleName raw " \
+                              "#{libexec}/KubectxBar.app/Contents/Info.plist").strip
   end
 end
