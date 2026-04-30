@@ -3,7 +3,7 @@ class Kubectxbar < Formula
   homepage "https://github.com/ericbrophy/kubectxbar"
   version "0.1.1"
   url "https://github.com/ericbrophy/homebrew-kubectxbar/releases/download/v#{version}/kubectxbar-#{version}-universal.tar.gz"
-  sha256 "c79f07829a1358a8c0e7b796fdf6920c74402d439b44eb465f5efed5f5841914"
+  sha256 "7cb0920124c1d4bbe2ddec08182735a25eae044c3a83fc758b3895ad5985b5c1"
   license "MIT"
 
   depends_on :macos
