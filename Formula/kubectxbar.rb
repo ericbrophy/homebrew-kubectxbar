@@ -1,9 +1,9 @@
 class Kubectxbar < Formula
   desc "macOS menu bar app for switching kubectl contexts"
   homepage "https://github.com/ericbrophy/kubectxbar"
-  version "0.1.1"
+  version "0.2.0"
   url "https://github.com/ericbrophy/homebrew-kubectxbar/releases/download/v#{version}/kubectxbar-#{version}-universal.tar.gz"
-  sha256 "7cb0920124c1d4bbe2ddec08182735a25eae044c3a83fc758b3895ad5985b5c1"
+  sha256 "84e8d040d8b46fb222129cf5d52d158df42b4563c2c5e3cea03e51a07ef7824f"
   license "MIT"
 
   depends_on :macos
